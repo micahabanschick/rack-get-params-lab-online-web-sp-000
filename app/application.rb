@@ -26,6 +26,23 @@ class Application
     resp.finish
   end
 
+  def handle_cart
+    if @@cart.empty?
+      "Your cart is empty"
+    else
+      @@cart.collect {|item| "#{item}\n"}.join
+    end
+  end
+
+  def handle_add(item)
+    if @@items.include?(item)
+      @@cart << item
+      "added #{item}"
+    else
+      "We don't have that item"
+    end
+  end
+
   def handle_search(search_term)
     if @@items.include?(search_term)
       return "#{search_term} is one of our items"
